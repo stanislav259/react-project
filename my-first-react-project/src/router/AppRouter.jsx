@@ -5,9 +5,9 @@ import About from "../pages/About"
 import Navbar from "../components/UI/navbar/Navbar"
 import Error from "../pages/Error"
 import PostIdPage from "../pages/PostIdPage";
-import { privateRoutes, publicRoutes } from "../router";
+import { privateRoutes, publicRoutes } from ".";
 import { AuthContext } from "../context";
-import MyLoader from "./UI/loader/MyLoader";
+import MyLoader from "../components/UI/loader/MyLoader";
 
 const AppRouter = () => {
   const {isAuth, setIsAuth, isLoading} = useContext(AuthContext)

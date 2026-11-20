@@ -1,85 +1,85 @@
-import React, { useState, useEffect, useRef } from 'react';
-import '../App.css';
-import PostList from '../components/PostList.jsx';
-import MyButton from '../components/UI/button/MyButton.jsx';
-import PostForm from '../components/PostForm.jsx';
-import PostFilter from '../components/PostFilter.jsx';
-import MyModal from '../components/UI/modal/MyModal.jsx';
-import { usePosts } from '../components/hooks/usePosts.js';
-import PostService from '../components/API/PostService.js';
-import MyLoader from '../components/UI/loader/MyLoader.jsx';
-import { useFetching } from '../components/hooks/useFetching.js';
-import { getPagesCount } from '../components/utils/pages.js';
-import Pagination from '../components/UI/pagination/Pagination.jsx';
-import { useObser } from '../components/hooks/useObserver.js';
-import MySelect from '../components/UI/select/MySelect.jsx';
+import React, { useState, useEffect } from "react";
+import PostList from "../components/posts/PostList.jsx";
+import PostFilter from "../components/posts/PostFilter.jsx";
+import MyLoader from "../components/UI/loader/MyLoader.jsx";
+import Pagination from "../components/UI/pagination/Pagination.jsx";
+import MySelect from "../components/UI/select/MySelect.jsx";
+import { usePosts } from "../hooks/usePosts.js";
+import { useFetching } from "../hooks/useFetching.js";
+import PostService from "../API/PostService.js";
+import { getPagesCount } from "../utils/pages.js";
+import classes from "./Posts.module.css";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
-  const [filter, setFilter] = useState({ selectedSort: '', searchQuery: '' });
-  const [modal, setModal] = useState(false);
-  const sortedAndSearchedPosts = usePosts(posts, filter.selectedSort, filter.searchQuery);
-  const lastElement = useRef();
-  const observer = useRef();
+  const [filter, setFilter] = useState({ selectedSort: "", searchQuery: "" });
 
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
 
+  const sortedAndSearchedPosts = usePosts(
+    posts,
+    filter.selectedSort,
+    filter.searchQuery
+  );
+
   const [fetchPosts, isLoading, error] = useFetching(async () => {
     const response = await PostService.getAll(limit, page);
-    setPosts([...posts, ...response.data]);
-    const totalCount = response.headers['x-total-count'];
+    setPosts(response.data);
+    const totalCount = response.headers["x-total-count"];
     setTotalPages(getPagesCount(totalCount, limit));
   });
-
-  useObser(lastElement, page<totalPages, isLoading, () => {
-    setPage(page + 1)
-  })
 
   useEffect(() => {
     fetchPosts();
   }, [page, limit]);
 
-  const createPost = (newPost) => {
-    setPosts([...posts, newPost]);
-    setModal(false);
-  };
-
   const removePost = (post) => {
-    setPosts(posts.filter(p => p.id !== post.id));
+    setPosts((prev) => prev.filter((p) => p.id !== post.id));
   };
 
-  const changePage = (page) => {
-    setPage(page);
+  const changePage = (newPage) => {
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleLimitChange = (value) => {
+    setLimit(Number(value));
+    setPage(1);
   };
 
   return (
-    <div className='App'>
-      <MyButton style={{ margin: '15px 0' }} onClick={() => setModal(true)}>
-        Создать пост
-      </MyButton>
-      <MyModal visible={modal} setVisible={setModal}>
-        <PostForm create={createPost} />
-      </MyModal>
-      <hr style={{ margin: '15px 0' }} />
-      <PostFilter filter={filter} setFilter={setFilter} />
-      <MySelect value={limit} onChange={value => setLimit(value)} defaultValue={'Кол-во постов на странице'} 
-        options={[
-          {value: 5, name:"5"},
-          {value: 10, name:"10"},
-          {value: 25, name:"25"},
-        ]}
+    <div className="App">
+      <div className={classes.postsHeader}>
+        <h1>Лента постов</h1>
+      </div>
+
+      <div className={classes.postsToolbar}>
+        <PostFilter filter={filter} setFilter={setFilter} />
+        <MySelect
+          value={limit}
+          onChange={handleLimitChange}
+          defaultValue="Постов на странице"
+          options={[
+            { value: 5, name: "По 5" },
+            { value: 10, name: "По 10" },
+            { value: 25, name: "По 25" },
+          ]}
         />
+      </div>
 
-      {error && <h1>Произошла ошибка {error}</h1>}
-      <PostList remove={removePost} posts={{ title: "Список постов", items: sortedAndSearchedPosts }} />
-      <div ref={lastElement} style={{ height: 20, background: 'transparent' }} />
+      {error && (
+        <div className={classes.errorBox}>Произошла ошибка: {error}</div>
+      )}
 
-      {isLoading && (
-        <div className='loader' style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
-          <MyLoader />
-        </div>
+      {isLoading ? (
+        <MyLoader />
+      ) : (
+        <PostList
+          remove={removePost}
+          posts={{ title: "Список постов", items: sortedAndSearchedPosts }}
+        />
       )}
 
       <Pagination page={page} totalPages={totalPages} changePage={changePage} />

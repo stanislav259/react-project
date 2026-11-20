@@ -1,8 +1,27 @@
 .myBtn {
-  padding: 5px 15px;
-  color: teal;
+  padding: 8px 16px;
+  color: #0d9488;
+  font-family: inherit;
   font-size: 14px;
-  background: transparent;
-  border: 1px solid teal ;
+  font-weight: 500;
+  background-color: transparent;
+  border: 1px solid #0d9488;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.myBtn:hover {
+  background-color: #0d9488;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.25);
+}
+
+.myBtn:active {
+  transform: scale(0.97);
+}
+
+.myBtn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.25);
 }

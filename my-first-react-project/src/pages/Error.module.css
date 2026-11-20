@@ -1,0 +1,33 @@
+.errorCard {
+  max-width: 460px;
+  margin: 48px auto;
+  padding: 36px 24px;
+  text-align: center;
+  background-color: var(--bg-surface, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
+}
+
+.code {
+  display: inline-block;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent, #0d9488);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main, #0f172a);
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted, #64748b);
+  margin-bottom: 24px;
+}

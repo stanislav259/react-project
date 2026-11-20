@@ -1,0 +1,85 @@
+.postCardFull {
+  padding: 24px;
+  background-color: var(--bg-surface, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  margin-bottom: 16px;
+}
+
+.postBadge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent, #0d9488);
+  background-color: var(--accent-soft, rgba(13, 148, 136, 0.12));
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.postTitle {
+  font-size: 24px;
+  line-height: 1.35;
+  color: var(--text-main, #0f172a);
+  margin-bottom: 12px;
+}
+
+.postBody {
+  color: var(--text-muted, #64748b);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.postTitle::first-letter,
+.postBody::first-letter,
+.commentCardBody::first-letter {
+  text-transform: uppercase;
+}
+
+.backBtnWrapper {
+  margin-bottom: 28px;
+}
+
+.commentsTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main, #0f172a);
+  margin-bottom: 16px;
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.commentCard {
+  padding: 16px;
+  background-color: var(--bg-surface, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 10px;
+}
+
+.commentCardAuthor {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent, #0d9488);
+  margin-bottom: 6px;
+}
+
+.commentCardBody {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.errorBox {
+  padding: 14px 16px;
+  margin: 16px 0;
+  border-radius: 10px;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  font-size: 14px;
+}

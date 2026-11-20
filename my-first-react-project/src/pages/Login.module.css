@@ -1,0 +1,36 @@
+.authCard {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  background-color: var(--bg-surface, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main, #0f172a);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-muted, #64748b);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}

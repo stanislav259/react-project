@@ -1,16 +1,15 @@
 .loader {
-  width: 100px;
-  height: 100px;
+  width: 48px;
+  height: 48px;
+  margin: 48px auto;
   border-radius: 50%;
-  border: 4px dashed teal;
-  animation: rotate 5s linear infinite;
+  border: 4px solid #e2e8f0;
+  border-top-color: #0d9488;
+  animation: rotate 0.8s linear infinite;
 }
 
 @keyframes rotate {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  100% {
-    transform: rotate(360deg) scale(1.2);
+  to {
+    transform: rotate(360deg);
   }
 }
