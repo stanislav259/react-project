@@ -1,19 +1,16 @@
 Маленький пет-проект на React
 
+Стек технологий
+- React(функциональные компоненты, хуки, Context API)
+- React Router (публичные и приватные маршруты)
+- REST API / JWT (регистрация, вход и проверка токена через учебный API Strapi; загрузка постов с JSONPlaceholder)
+- CSS Modules
+- Vite
 
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Основные функции 
+- Регистрация и авторизация: создание аккаунта, вход по логину/e-mail и паролю, автоматический вход после регистрации, сохранение и проверка JWT-токена в `localStorage`.
+- Защищённые маршруты: разделение доступа для авторизованных и неавторизованных пользователей через `AuthContext`.
+- Работа с постами:загрузка публикаций и комментариев с внешнего API, просмотр отдельной страницы поста.
+- Поиск и фильтрация: мгновенный поиск по заголовкам и сортировка списка постов.
+- Пагинация: постраничный вывод публикаций с выбором лимита элементов на странице.
+- Управление контентом: создание новых постов через модальное окно и удаление существующих.

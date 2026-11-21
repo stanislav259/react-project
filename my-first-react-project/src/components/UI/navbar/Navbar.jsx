@@ -4,11 +4,12 @@ import MyButton from "../button/MyButton";
 import { AuthContext } from "../../../context";
 
 const Navbar = () => {
-  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const { isAuth, setIsAuth, userData, setUserData } = useContext(AuthContext);
 
   const logOut = () => {
     setIsAuth(false);
-    localStorage.removeItem("auth");
+    setUserData({ username: "", email: "" });
+    localStorage.removeItem("jwt");
   };
 
   return (
@@ -21,6 +22,7 @@ const Navbar = () => {
         <nav className="navbar__links">
           <NavLink to="/posts">Посты</NavLink>
           <NavLink to="/about">О сайте</NavLink>
+          {isAuth && userData?.username && <span>{userData.username}</span>}
           {isAuth && <MyButton onClick={logOut}>Выйти</MyButton>}
         </nav>
       </div>
