@@ -1,7 +1,14 @@
 export const BASE_URL = 'https://api.nomoreparties.co';
+import {User, IAuthResponse} from './auth';
+
 
 export default class AuthService {
-  static async register(username, password, email) {
+
+  static async register(
+    username: string,
+    password: string,
+    email: string,
+  ): Promise<IAuthResponse> {
     const response = await fetch(`${BASE_URL}/auth/local/register`, {
       method: 'POST',
       headers: {
@@ -10,15 +17,18 @@ export default class AuthService {
       },
       body: JSON.stringify({ username, password, email }),
     });
-    const data = await response.json();
-    if (data.jwt) {
-      localStorage.setItem('jwt', data.jwt);
-      return data;
+    const data: Partial<IAuthResponse> = await response.json();
+    if (response.ok && data.jwt && data.user) {
+      localStorage.setItem("jwt", data.jwt);
+      return data as IAuthResponse;
     }
     throw new Error('Ошибка при регистрации (логин или e-mail уже заняты)');
   }
 
-  static async authorize(identifier, password) {
+  static async authorize(
+    identifier: string, 
+    password: string)
+    :Promise<AuthService> {
     const response = await fetch(`${BASE_URL}/auth/local`, {
       method: 'POST',
       headers: {
@@ -27,15 +37,15 @@ export default class AuthService {
       },
       body: JSON.stringify({ identifier, password }),
     });
-    const data = await response.json();
-    if (data.jwt) {
-      localStorage.setItem('jwt', data.jwt);
-      return data;
+    const data: Partial<IAuthResponse> = await response.json();
+    if (response.ok && data.jwt && data.user) {
+      localStorage.setItem("jwt", data.jwt);
+      return data as IAuthResponse;
     }
     throw new Error('Неверный логин или пароль');
   }
 
-  static async getContent(token) {
+  static async getContent(token: string): Promise<User> {
     const response = await fetch(`${BASE_URL}/users/me`, {
       method: 'GET',
       headers: {
@@ -47,6 +57,6 @@ export default class AuthService {
     if (!response.ok) {
       throw new Error('Токен невалиден');
     }
-    return response.json();
+    return response.json() as Promise<User>;
   }
 }

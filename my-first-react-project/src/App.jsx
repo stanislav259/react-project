@@ -32,22 +32,21 @@ function App() {
     }
   }, [])
   return (
-    <div>
-      <AuthContext.Provider
-        value={{
-          isAuth,
-          setIsAuth,
-          isLoading,
-          userData,
-          setUserData,
-        }}
-      >
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
-      </AuthContext.Provider> 
-    </div>
-  )
+    <AuthContext.Provider
+      value={{
+        isAuth,
+        setIsAuth,
+        isLoading,
+        userData,
+        setUserData,
+      }}
+    >
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </AuthContext.Provider>
+  );
 }
+
 
 export default App

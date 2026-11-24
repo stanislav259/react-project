@@ -4,9 +4,9 @@ import PostFilter from "../components/posts/PostFilter.jsx";
 import MyLoader from "../components/UI/loader/MyLoader.jsx";
 import Pagination from "../components/UI/pagination/Pagination.jsx";
 import MySelect from "../components/UI/select/MySelect.jsx";
-import { usePosts } from "../hooks/usePosts.js";
-import { useFetching } from "../hooks/useFetching.js";
-import PostService from "../API/PostService.js";
+import { usePosts } from "../hooks/usePosts";
+import { useFetching } from "../hooks/useFetching";
+import PostService from "../API/PostService";
 import { getPagesCount } from "../utils/pages.js";
 import classes from "./Posts.module.css";
 

@@ -4,7 +4,7 @@ import MyInput from "../components/UI/input/MyInput";
 import MyButton from "../components/UI/button/MyButton";
 import { AuthContext } from "../context";
 import AuthService from "../API/AuthService";
-import classes from "./Login.module.css";
+import classes from "./Register.module.css";
 
 const Register = () => {
   const { setIsAuth, setUserData } = useContext(AuthContext);
@@ -12,6 +12,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -42,6 +43,7 @@ const Register = () => {
             placeholder="Имя пользователя (логин)"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            minLength={3}
             required
           />
           <MyInput
@@ -53,20 +55,23 @@ const Register = () => {
           />
           <MyInput
             type="password"
-            placeholder="Пароль"
+            placeholder="Пароль (минимум 6 символов)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            minLength={6}
             required
           />
 
-          {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
+          {error && <div className={classes.errorBox}>{error}</div>}
 
           <div className={classes.btnWrapper}>
-            <MyButton type="submit">Зарегистрироваться</MyButton>
+            <MyButton type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Регистрация..." : "Зарегистрироваться"}
+            </MyButton>
           </div>
         </form>
 
-        <p style={{ marginTop: "15px", fontSize: "14px" }}>
+        <p className={classes.switchAuth}>
           Уже есть аккаунт? <Link to="/login">Войти</Link>
         </p>
       </div>
